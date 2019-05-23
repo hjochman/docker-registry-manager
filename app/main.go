@@ -6,8 +6,8 @@ import (
 
 	"github.com/astaxie/beego"
 	"github.com/sirupsen/logrus"
-	"github.com/snagles/docker-registry-manager/app/models"
-	_ "github.com/snagles/docker-registry-manager/app/routers"
+	"github.com/hjochman/docker-registry-manager/app/models"
+	_ "github.com/hjochman/docker-registry-manager/app/routers"
 	"github.com/urfave/cli"
 )
 

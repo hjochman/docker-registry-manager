@@ -39,7 +39,7 @@
 
 [[constraint]]
   branch = "master"
-  name = "github.com/snagles/docker-registry-client"
+  name = "github.com/hjochman/docker-registry-client"
 
 [[constraint]]
   name = "github.com/spf13/viper"

@@ -10,7 +10,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/toolbox"
 	"github.com/sirupsen/logrus"
-	"github.com/snagles/docker-registry-manager/app/conf"
+	"github.com/hjochman/docker-registry-manager/app/conf"
 )
 
 type logResponse struct {

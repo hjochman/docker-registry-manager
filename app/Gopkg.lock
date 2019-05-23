@@ -120,7 +120,7 @@
 [[projects]]
   branch = "master"
   digest = "1:31674540c769f5a7dc6ed045fdda400a2a353240fb72467bb68fea72ef505596"
-  name = "github.com/snagles/docker-registry-client"
+  name = "github.com/hjochman/docker-registry-client"
   packages = ["registry"]
   pruneopts = "UT"
   revision = "db19f0d8169544eacc78f1cd8106c6f788b84f20"
@@ -229,7 +229,7 @@
     "github.com/docker/distribution",
     "github.com/docker/distribution/manifest/schema2",
     "github.com/sirupsen/logrus",
-    "github.com/snagles/docker-registry-client/registry",
+    "github.com/hjochman/docker-registry-client/registry",
     "github.com/spf13/viper",
     "github.com/urfave/cli",
   ]

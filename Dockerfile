@@ -5,11 +5,11 @@ FROM golang:alpine as build-env
 RUN apk add --no-cache git
 
 # Copy the local package files to the container's workspace.
-ADD . /go/src/github.com/snagles/docker-registry-manager
+ADD . /go/src/github.com/hjochman/docker-registry-manager
 
 # Build the application using the bee tool
 RUN go get github.com/beego/bee
-RUN bee pack -p /go/src/github.com/snagles/docker-registry-manager/app
+RUN bee pack -p /go/src/github.com/hjochman/docker-registry-manager/app
 RUN mkdir /app
 RUN tar -xzvf /go/app.tar.gz --directory /app
 
@@ -21,7 +21,7 @@ RUN apk add --no-cache curl
 # Copy packed beego tar
 WORKDIR /app
 COPY --from=build-env /app /app
-COPY --from=build-env /go/src/github.com/snagles/docker-registry-manager/registries.yml /app/registries.yml
+COPY --from=build-env /go/src/github.com/hjochman/docker-registry-manager/registries.yml /app/registries.yml
 COPY app/ibmcloud-list.sh /bin/ibmcloud-list.sh
 
 RUN chmod +x /bin/ibmcloud-list.sh

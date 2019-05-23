@@ -30,7 +30,7 @@ func init() {
 		GOPATH = defaultGOPATH()
 	}
 
-	appPath := GOPATH + "/src/github.com/snagles/docker-registry-manager/app"
+	appPath := GOPATH + "/src/github.com/hjochman/docker-registry-manager/app"
 	LogDir = appPath + "/logs/"
 	LogFile = LogDir + "/log.json"
 

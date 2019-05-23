@@ -8,3 +8,6 @@ app/logs/log.json
 .idea
 test/registrytest/configs/auth/*
 test/registrytest/storage/*
+registries-ibm.yml
+registries.yml.save
+.gitignore

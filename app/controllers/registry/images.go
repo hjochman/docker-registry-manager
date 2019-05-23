@@ -7,8 +7,8 @@ import (
 
 	"github.com/astaxie/beego"
 	manifestV2 "github.com/docker/distribution/manifest/schema2"
-	"github.com/snagles/docker-registry-manager/app/models"
-	"github.com/snagles/docker-registry-manager/app/models/dockerhub"
+	"github.com/hjochman/docker-registry-manager/app/models"
+	"github.com/hjochman/docker-registry-manager/app/models/dockerhub"
 )
 
 // ImagesController controls access to any meta information surrounding a registry image

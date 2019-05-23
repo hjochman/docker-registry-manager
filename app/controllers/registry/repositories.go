@@ -2,7 +2,7 @@ package registry
 
 import (
 	"github.com/astaxie/beego"
-	"github.com/snagles/docker-registry-manager/app/models"
+	"github.com/hjochman/docker-registry-manager/app/models"
 )
 
 // RepositoriesController controls interactions between the UI and any repository related information
