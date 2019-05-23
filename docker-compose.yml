@@ -3,18 +3,18 @@ version: '2'
 services:
   docker-registry-manager:
     container_name: docker-registry-manager
-    image: snagles/docker-registry-manager
+    image: ivk-docker-snapshots.jfrog.ivkmds.com/docker-registry-manager:latest
     ports:
       - "8080:8080"
     volumes:
-      - ./registries.yml:/app/registries.yml
+      - ./registries-ibm.yml:/app/registries.yml
       #- ./ssl.crt:/app/ssl.crt # https certfile location
       #- ./ssl.key:/app/ssl.key # https keyfile location
 
     environment:
       - MANAGER_PORT=8080
       - MANAGER_REGISTRIES=/app/registries.yml
-      - MANAGER_LOG_LEVEL=warn
+      - MANAGER_LOG_LEVEL=info
       #- MANAGER_ENABLE_HTTPS=true
       #- MANAGER_KEY=/app/ssl.crt
       #- MANAGER_CERTIFICATE=/app/ssl.key

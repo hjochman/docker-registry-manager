@@ -1,0 +1,21 @@
+# Distributed image
+FROM alpine
+RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache curl
+
+# Copy packed beego tar
+WORKDIR /app
+COPY app/app /app/app
+COPY registries.yml /app/registries.yml
+COPY app/ibmcloud-list.sh /app/ibmcloud-list.sh
+
+RUN chmod +x /app/ibmcloud-list.sh
+RUN curl -fsSL https://clis.cloud.ibm.com/install/linux | /bin/sh
+
+# Set the default registries location and volume
+ENV MANAGER_REGISTRIES=/app/registries.yml
+ENV MANAGER_LOG_LEVEL=warn
+VOLUME ["/app"]
+
+# Run the app by default when the container starts
+CMD ["/app/app"]

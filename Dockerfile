@@ -16,11 +16,17 @@ RUN tar -xzvf /go/app.tar.gz --directory /app
 # Distributed image
 FROM alpine:3.7
 RUN apk add --no-cache ca-certificates
+RUN apk add --no-cache curl
 
 # Copy packed beego tar
 WORKDIR /app
 COPY --from=build-env /app /app
 COPY --from=build-env /go/src/github.com/snagles/docker-registry-manager/registries.yml /app/registries.yml
+COPY app/ibmcloud-list.sh /bin/ibmcloud-list.sh
+
+RUN chmod +x /bin/ibmcloud-list.sh
+RUN curl -fsSL https://clis.cloud.ibm.com/install/linux | /bin/sh
+RUN ibmcloud plugin install container-registry
 
 # Set the default registries location and volume
 ENV MANAGER_REGISTRIES=/app/registries.yml

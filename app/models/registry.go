@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"os/exec"
 
 	manifestV2 "github.com/docker/distribution/manifest/schema2"
 	"github.com/sirupsen/logrus"
@@ -103,15 +104,35 @@ func (r Registry) Update() Registry {
 
 	logrus.Info("Refreshing " + r.Name)
 	// Get the list of repositories
-	repos, err := r.Registry.Repositories()
-	if err != nil {
-		logrus.WithFields(logrus.Fields{
-			"Error": err.Error(),
-		}).Error("Failed to retrieve an updated list of repositories for " + r.URL)
+	
+	var repos []string
+	if strings.Contains(r.URL, ".icr.io") { // IBM Cloud docker Registry
+		logrus.Info("IBM Cloud Registry")
+		cmdOut, err := exec.Command("ibmcloud-list.sh",r.Password,r.Host).Output()
+		if err != nil {
+			logrus.WithFields(logrus.Fields{
+				"Error": err.Error(),
+			}).Error("Failed to retrieve an updated list of repositories for " + r.URL)
+		}
+		logrus.Info("IBM Cloud Registry return: " + string(cmdOut))
+		repos = strings.Split(string(cmdOut),",")
+		logrus.Info("IBM Cloud Registry repos: " + strings.Join(repos, ", "))
+	} else { //other Registry
+		logrus.Info("non IBM Cloud Registry")
+		repos, err = r.Registry.Repositories()
+		if err != nil {
+			logrus.WithFields(logrus.Fields{
+				"Error": err.Error(),
+			}).Error("Failed to retrieve an updated list of repositories for " + r.URL)
+		}
 	}
+
+	logrus.Info("Registry repos: " + strings.Join(repos, ", "))
+
 	// Get the repository information
 	r.Repositories = make(map[string]*Repository)
 	for _, repoName := range repos {
+		logrus.Info("Loding repository: " + repoName)
 
 		// Get the list of tags for the repository
 		tags, err := r.Tags(repoName)
@@ -126,6 +147,7 @@ func (r Registry) Update() Registry {
 		repo := Repository{Name: repoName, Tags: make(map[string]*Tag)}
 		// Get the manifest for each of the tags
 		for _, tagName := range tags {
+			logrus.Info("Loding tag: " + repoName +":"+ tagName)
 
 			// Using v2 required getting the manifest then retrieving the blob
 			// for the config digest
