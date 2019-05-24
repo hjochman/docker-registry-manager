@@ -3,7 +3,7 @@ version: '2'
 services:
   docker-registry-manager:
     container_name: docker-registry-manager
-    image: ivk-docker-snapshots.jfrog.ivkmds.com/docker-registry-manager:latest
+    image: de.icr.io/mds-classic/snapshots/docker-registry-manager:latest
     ports:
       - "8080:8080"
     volumes:

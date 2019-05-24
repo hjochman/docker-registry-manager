@@ -2,7 +2,7 @@
 # $1=password $2=host
 
 set -e
-function join_by { local IFS="$1"; shift; echo "$*"; }
+function join_by { local IFS="$1"; shift; echo -n "$*"; }
 
 BLUEMIX_API_KEY=$1
 
