@@ -29,9 +29,10 @@
           <tbody>
             {{range $key, $repository := .repositories}}
               <tr>
-                <td data-order="{{$repository.Name}}">
-                  <a href="/registries/{{$.registryName}}/repositories/{{urlquery $repository.Name}}/tags">{{$repository.Name}}</span></td>
-                <td>{{bytefmt $repository.Size}}</td>
+                <td>
+                  <a href="/registries/{{$.registryName}}/repositories/{{urlquery $repository.Name}}/tags">{{$repository.Name}}</a>
+                </td>
+                <td data-order="{{$repository.Size}}">{{bytefmt $repository.Size}}</td>
                 <td>{{len $repository.Tags}}</td>
               </tr>
             {{end}}
@@ -45,7 +46,7 @@
     $(document).ready(function () {
       $('#datatable').DataTable({
         "order": [
-          [1, "asc"]
+          [0, "asc"]
         ],
         "info": false
       });

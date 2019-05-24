@@ -35,26 +35,27 @@
 				</tfoot>
 				<tbody>
 					{{range $registryName, $repositories := .repositories}} {{range $key, $repo := $repositories}}
-					<tr>
-						<td>
-							<a href=/registries/{{$registryName}}/repositories/{{urlquery $repo.Name}}/tags>{{$repo.Name}}</span></td>
-                  <td>{{$registryName}}</td>
-                  <td data-order="{{$repo.Size}}">{{bytefmt $repo.Size}}</td>
-                  <td>{{len $repo.Tags}}</td>
-                </tr>
-              {{end}}
-            {{end}}
-          </tbody>
-        </table>
-      </div>
-    </div>
+  					<tr>
+	  					<td>
+		  					<a href="/registries/{{$registryName}}/repositories/{{urlquery $repo.Name}}/tags">{{$repo.Name}}</a>
+			  			</td>
+              <td>{{$registryName}}</td>
+              <td data-order="{{$repo.Size}}">{{bytefmt $repo.Size}}</td>
+              <td>{{len $repo.Tags}}</td>
+            </tr>
+          {{end}}
+          {{end}}
+        </tbody>
+      </table>
   </div>
+</div>
+
 
   <script>
     $(document).ready(function () {
       $('#datatable').DataTable({
         "order": [
-          [1, "asc"]
+          [0, "asc"]
         ],
         "pageLength": 25
       });
